@@ -86,20 +86,28 @@ div#slider figure {
 
 - ajout d'un template twig base.html.twig dans themes/learn2/templates
 
-{% endraw  %}
+{% raw  %}
 {% extends 'partials/base.html.twig' %}
+{% endraw  %}
 
+{% raw  %}
 {% block content %}
+{% endraw  %}
 
     <div id="slider">
         <figure>
+        {% raw  %}
         {% for image in page.media.images %}
+        {% endraw  %}
             {{ image.html }}
+        {% raw  %}
         {% endfor %}
+        {% endraw  %}
         </figure>
     </div>
 
     {{ page.content }}
+{% raw  %}
 {% endblock %}
 {% endraw  %}
 
