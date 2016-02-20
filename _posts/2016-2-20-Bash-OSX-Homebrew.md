@@ -16,7 +16,9 @@ done
 
 Ce script a pour but de prendre tous les fichiers pdf du répertoire courant et de modifier tous les noms pour qu'ils soient en minuscules. ^^ fait exactement l'inverse à savoir tout mettre en majuscule.
 
-Pour plus d'informations sur ces substitutions : http://wiki.bash-hackers.org/syntax/pe#overview
+Pour plus d'informations sur ces substitutions : 
+[http://wiki.bash-hackers.org/syntax/pe#overview](http://wiki.bash-hackers.org/syntax/pe#overview)
+
 
 On peut faire des choses assez puissantes comme ne récupérer que certaines parties d'une chaîne suivant une expression régulière. Ce qui est intéressant est la concision pour y parvenir.
 
@@ -44,8 +46,10 @@ On peut se passer d'installer XCode pour l'instant (question posée par l'instal
 
 Ensuite, on lance dans le terminal brew install bash.
 
-Ceci a pour effet d'installer un nouveau bash 4.3.42 dans /usr/local/Cellar/bash/4.3.42/bin/bash /bin/bash
-
+Ceci a pour effet d'installer un nouveau bash 4.3.42 dans : 
+```sh
+/usr/local/Cellar/bash/4.3.42/bin/bash /bin/bash
+```
 On renomme ensuite l'ancien bash en bash-3
 
 ```sh
