@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mettre à jour son bash sous Mac OS X 10.10
-tags: "osx, bash"
+tags: "osx, bash, brew"
 published: true
 ---
 
