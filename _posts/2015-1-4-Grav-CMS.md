@@ -10,7 +10,9 @@ Entre site statique et site classique comme Wordpress ou Drupal, il y a [Grav](h
 
 ### Présentation
 
-Jekyll est une générateur de sites web. Ils sont très pratiques pour déposer de simples pages HTML statiques ce qui adresse bien la problématique des blogs avec très peu d'interaction. De cette façon on évite tout problème de performance et on simplifie sa pile de technos pour un petit site documentaire. Si l'on a un blog par exemple et que l'on veut un peu d'interaction comme la partie commentaire, il existe maintenant des tiers qui peuvent intégrer leur système comme [Disqus](https://disqus.com) par exemple.
+Jekyll est un générateur de **sites web statique**. À quoi peut bien servir ces systèmes qui ne proposent pas plus mais moins de fonctionnalités? 
+
+Ils sont très pratiques pour des sites contenant de simples pages HTML statiques avec peu d'interaction, ce qui adresse bien la problématique des blogs. De cette façon on évite tout problème de performance et on simplifie sa pile de technos pour un site documentaire. Si l'on a un blog par exemple et que l'on veut un peu d'interaction comme la partie commentaire, il existe maintenant des tiers qui peuvent intégrer leur système comme [Disqus](https://disqus.com) par exemple.
 
 Le problème est qu'il faut lancer une commande de génération ce qui est toujours un peu pénible. Pourquoi puisque PHP contient des librairies permettant d'interpréter le Markdown, ne pas avoir un système qui interprète dynamiquement le Markdown mais sans avoir à gérer une base de données? C'est ce que propose Grav. 
 
@@ -176,7 +178,7 @@ title: Écrans application smartphone
 
 #### Écrans
 
->>> Voici les 37 écrans jQuery mobile pour la version 2015
+>Voici les 37 écrans jQuery mobile pour la version 2015
 ```
 
 
