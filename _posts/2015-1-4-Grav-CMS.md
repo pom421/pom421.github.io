@@ -1,5 +1,6 @@
 ---
 layout: post
+title: Tips Grav CMS
 published: true
 tags: cms, php
 ---
@@ -133,7 +134,8 @@ figure.stacked figcaption{
 ```
 
 themes/learn2/templates/gallery.html.twig
-```twig
+
+```html
 {% extends 'partials/base.html.twig' %}
 
 {#
