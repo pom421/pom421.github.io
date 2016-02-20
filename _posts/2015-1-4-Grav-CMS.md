@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tips Grav CMS
+title: Grav CMS
 tags: php, cms
 published: true
 ---
