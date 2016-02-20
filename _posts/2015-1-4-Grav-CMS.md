@@ -86,3 +86,110 @@ div#slider figure {
 
 - ajout d'un template twig base.html.twig dans themes/learn2/templates
 
+```
+{{ "{% extends 'partials/base.html.twig' %}" }}
+
+{% block content %}
+
+    <div id="slider">
+        <figure>
+        {% for image in page.media.images %}
+            {{ image.html }}
+        {% endfor %}
+        </figure>
+    </div>
+
+    {{ page.content }}
+{% endblock %}
+```
+
+Le fichier md doit s'appeler base.md et peut être vide ou avoir comme ici seulement un titre.
+
+```yaml
+---
+title: slider d'image
+---
+```
+
+### Ajout d'une page de gallerie
+
+>On ajoute un template pour afficher automatiquement toutes les images se trouvant dans le répertoire du fichier markdown.
+
+themes/learn2/css/custom.css
+```css
+figure.stacked{
+  float: left;
+  margin: 0 20px;
+  text-align: center;
+}
+
+figure.stacked img{
+  border: 1px dotted lightgray;
+  padding: 1px;
+}
+
+figure.stacked figcaption{
+  font-weight: bold;
+}
+```
+
+themes/learn2/templates/gallery.html.twig
+
+
+
+```html
+{% extends 'partials/base.html.twig' %}
+
+{#
+  ajout pom galerie de toutes les images
+#}
+
+{% block content %}
+  {{ page.content }}
+
+        {% for image in page.media.images %}
+          <figure class="stacked">
+            {{ image.html(image.url, image.url) }}
+            <figcaption>
+              {% set fileName = image.url | split('/') %}
+              {{ fileName[count(fileName) - 1] }}
+            </figcaption>
+          </figure>
+        {% endfor %}
+{% endblock %}
+```
+
+
+Le fichier markdown doit s'appeler gallery.md pour être associé à ce nouveau template.
+
+```md
+---
+title: Écrans application smartphone
+---
+
+#### Écrans
+
+>Voici les 37 écrans jQuery mobile pour la version 2015
+```
+
+
+>Auparavant, les images ont été préfixées par un chiffre afin de fixer un certain ordre d'affichage.
+
+#### Browser-sync
+
+Il est possible grâce à Browser-sync de voir les modifications incrémentales faites dans les fichiers markdown sans avoir besoin de recharger la page du navigateur, tout cela en gardant la même position dans la page (la position de l'ascenseur est conservée!). Pour cela, il faut :
+
+- se placer dans le répertoire contenant memento
+- lancer la commande suivante utilisant browser-sync en mode proxy :
+
+```sh
+browser-sync start --proxy "localhost/~pomauguet/memento" --files "user/**/*.md"
+```
+
+Ensuite, il faut utiliser [l'URL](http://localhost:3000/~pomauguet/memento/) du serveur browser-sync :
+
+### FAQ
+
+**J'ai supprimé un répertoire et il est pourtant toujours visible dans le site?**
+
+Ceci est dû à un problème de cache. Pour corriger cela, aller sur la [page d'admin](http://localhost/~pomauguet/memento/admin) et cliquer sur Clear cache.
