@@ -5,6 +5,8 @@ published: true
 ---
 
 DEBUT 
+
+{% raw %}
 {% extends 'partials/base.html.twig' %}
 
 {% block content %}
@@ -19,4 +21,5 @@ DEBUT
 
     {{ page.content }}
 {% endblock %}
+{% endraw %}
 FIN
