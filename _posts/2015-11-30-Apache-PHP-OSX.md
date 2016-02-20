@@ -102,7 +102,7 @@ root# sudo apachectl restart
 Le site est accessible avec un navigateur pointant sur :
 [http://localhost/~woody/phpinfo.php](http://localhost/~woody/phpinfo.php)
 
-** En cas de problème de permission**
+**En cas de problème de permission**
 
 Référence : [http://learn.getgrav.org/troubleshooting/permissions](http://learn.getgrav.org/troubleshooting/permissions)
 
