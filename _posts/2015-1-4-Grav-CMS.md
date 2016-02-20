@@ -84,7 +84,7 @@ div#slider figure {
 }
 ```
 
-Dans themes/learn2/templates/gallery.html.twig
+- ajout d'un template twig base.html.twig dans themes/learn2/templates
 
 {% raw %}
 ```twig
@@ -104,4 +104,34 @@ Dans themes/learn2/templates/gallery.html.twig
 {% endblock %}
 ```
 {% endraw %}
-FIN
+
+Le fichier md doit s'appeler base.md et peut être vide ou avoir comme ici seulement un titre.
+
+```yaml
+---
+title: slider d'image
+---
+```
+
+### Ajout d'une page de gallerie
+
+>>>>>On ajoute un template pour afficher automatiquement toutes les images se trouvant dans le répertoire du fichier markdown.
+
+themes/learn2/css/custom.css
+```css
+figure.stacked{
+  float: left;
+  margin: 0 20px;
+  text-align: center;
+}
+
+figure.stacked img{
+  border: 1px dotted lightgray;
+  padding: 1px;
+}
+
+figure.stacked figcaption{
+  font-weight: bold;
+}
+```
+
