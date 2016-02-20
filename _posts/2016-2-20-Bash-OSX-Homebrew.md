@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Mettre à jour son bash sous Mac OS X 10.10
+tags: osx, bash
 ---
 
 Cet article montre comment mettre à jour son shell bash sous OS X Yosemite.
