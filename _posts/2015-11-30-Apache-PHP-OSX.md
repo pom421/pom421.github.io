@@ -1,7 +1,8 @@
 ---
-title: Apache & PHP sur OS X
-date: 11/30/2015
+layout: post
+title: Configurer Apache/PHP sous OS X 10.11
 tags: osx, apache, php
+published: true
 ---
 
 Ce document explique comment configurer Apache + PHP sous OS X El Capitan 10.11.
