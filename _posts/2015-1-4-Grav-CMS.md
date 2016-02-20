@@ -5,16 +5,21 @@ tags: php, cms
 published: true
 ---
 
-Il n'y pas que [Jekyll](http://jekyllrb.com/) dans la vie ni que des générateurs de sites statiques. 
-Entre site statiques et site classique comme Wordpress ou Drupal, il y a [Grav](https://getgrav.org/) un système dynamique mais sans base de données (et très puissant). 
+Il n'y pas que [Jekyll](http://jekyllrb.com/) dans la vie. 
+Entre site statique et site classique comme Wordpress ou Drupal, il y a [Grav](https://getgrav.org/) un système dynamique mais sans base de données (et très puissant). 
+
+### Présentation
+
+Jekyll est une générateur de sites web. Ils sont très pratiques pour déposer de simples pages HTML statiques ce qui adresse bien la problématique des blogs avec très peu d'interaction. De cette façon on évite tout problème de performance et on simplifie sa pile de technos pour un petit site documentaire. Si l'on a un blog par exemple et que l'on veut un peu d'interaction comme la partie commentaire, il existe maintenant des tiers qui peuvent intégrer leur système comme [Disqus](https://disqus.com) par exemple.
+
+Le problème est qu'il faut lancer une commande de génération ce qui est toujours un peu pénible. Pourquoi puisque PHP contient des librairies permettant d'interpréter le Markdown, ne pas avoir un système qui interprète dynamiquement le Markdown mais sans avoir à gérer une base de données? C'est ce que propose Grav. 
 
 ### Plugin Admin
 
 Ce plugin est très utile puisqu'il permet d'administrer le site : ajouter, modifier des pages.
-Cacher le cache, etc..
+Supprimer le cache, etc..
 
 Prendre le skeleton avec le plugin d'administration sur le site officiel.
-(mdp : D23)
 
 ### Support des fichiers open office
 
@@ -161,6 +166,40 @@ figure.stacked figcaption{
 {% endblock %}
 ```
 {% endraw %}
+
+Le fichier markdown doit s'appeler gallery.md pour être associé à ce nouveau template.
+
+```md
+---
+title: Écrans application smartphone
+---
+
+#### Écrans
+
+>>> Voici les 37 écrans jQuery mobile pour la version 2015
+```
+
+
+>>>Auparavant, les images ont été préfixées par un chiffre afin de fixer un certain ordre d'affichage.
+
+#### Browser-sync
+
+Il est possible grâce à Browser-sync de voir les modifications incrémentales faites dans les fichiers markdown sans avoir besoin de recharger la page du navigateur, tout cela en gardant la même position dans la page (la position de l'ascenseur est conservée!). Pour cela, il faut :
+
+- se placer dans le répertoire contenant memento
+- lancer la commande suivante utilisant browser-sync en mode proxy :
+
+```sh
+browser-sync start --proxy "localhost/~pomauguet/memento" --files "user/**/*.md"
+```
+
+Ensuite, il faut utiliser [l'URL](http://localhost:3000/~pomauguet/memento/) du serveur browser-sync :
+
+### FAQ
+
+**J'ai supprimé un répertoire et il est pourtant toujours visible dans le site?**
+
+Ceci est dû à un problème de cache. Pour corriger cela, aller sur la [page d'admin](http://localhost/~pomauguet/memento/admin) et cliquer sur Clear cache.
 
 
 
