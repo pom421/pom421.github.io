@@ -11,6 +11,7 @@ Référence : [http://coolestguidesontheplanet.com/get-apache-mysql-php-and-phpm
 
 
 Sous OS X, un apache est déjà présent qui peut être configuré avec PHP comme on peut le constater :
+
 ```sh
 woody$ php -v
 PHP 5.5.27 (cli) (built: Aug 22 2015 18:20:44)
@@ -111,7 +112,9 @@ Par défaut sous OS X, le processus Apache est lancé avec le compte \_www dans 
 Cela pose problème pour Grav car il a besoin d'écrire des fichiers (par exemple dans le répertoire cache).
 
 Il y a plusieurs manières de régler ce problème. Le plus simple est de faire lancer le processus par
-l'utilisateur.
+l'utilisateur. 
+
+Modification de /private/etc/apache2/httpd.conf : 
 
 ```sh
 User woody
