@@ -84,7 +84,7 @@ div#slider figure {
 }
 ```
 
-themes/learn2/templates/gallery.html.twig
+Dans themes/learn2/templates/gallery.html.twig
 
 {% raw %}
 ```twig
@@ -104,4 +104,4 @@ themes/learn2/templates/gallery.html.twig
 {% endblock %}
 ```
 {% endraw %}
-
+FIN
