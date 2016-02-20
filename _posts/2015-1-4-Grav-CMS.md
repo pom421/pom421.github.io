@@ -2,7 +2,6 @@
 layout: post
 title: Tips Grav CMS
 published: true
-tags: cms, php
 ---
 
 Il n'y pas que [Jekyll](http://jekyllrb.com/) dans la vie ni que des générateurs de sites statiques. 
@@ -86,8 +85,8 @@ div#slider figure {
 
 - ajout d'un template twig base.html.twig dans themes/learn2/templates
 
-```html
-{% \extends 'partials/base.html.twig' %}
+```
+{% extends 'partials/base.html.twig' %}
 
 {% block content %}
 
