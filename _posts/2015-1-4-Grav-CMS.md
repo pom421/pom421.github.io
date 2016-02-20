@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Tips Grav CMS
+tags: php, cms
 published: true
 ---
 
@@ -21,7 +22,7 @@ Par défaut le CMS ne connaît pas les fichiers .odt.
 
 Pour cela, il faut ajouter dans system/config/media.yaml les définitions suivantes :
 
-```
+```sh
 odt:
   type: file
   mime: application/vnd.oasis.opendocument.text
@@ -38,7 +39,7 @@ odg:
 
 Ajouté également pour des fichiers dmg
 
-```
+```sh
 dmg:
   type: file
   mime: application/octet-stream
