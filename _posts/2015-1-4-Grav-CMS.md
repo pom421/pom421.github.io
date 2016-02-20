@@ -115,9 +115,10 @@ title: slider d'image
 
 ### Ajout d'une page de gallerie
 
->>>>>On ajoute un template pour afficher automatiquement toutes les images se trouvant dans le répertoire du fichier markdown.
+>On ajoute un template pour afficher automatiquement toutes les images se trouvant dans le répertoire du fichier markdown.
 
-themes/learn2/css/custom.css
+- ajout d'un theme : themes/learn2/css/custom.css
+
 ```css
 figure.stacked{
   float: left;
