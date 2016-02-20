@@ -52,7 +52,14 @@ dmg:
   mime: application/octet-stream
 ```
 
-### Ajout d'un slider
+### Ajout de template
+
+Grav impose une organisation un peu particulière et finalement très pratique. 
+Les fichiers markdown ne se retrouvent pas en vrac dans un grand répertoire (comme Jekyll) mais chaque .md a son propre répertoire spécifique. Ce répertoire est préfixé par un chiffre permettant de fixer un ordre particulier (mais cela peut être aussi une date pour un blog). Dans ce répertoire, on sauve le markdown sous un nom qui permettra de définir le template à appliquer, ce qui peut suprendre. Si l'on a un fichier docs.md, c'est le template /templates/docs.html.twig qui va se charger du rendu. Ces templates ont accès au méta données du yaml front matter mais aussi aux fichiers contenus dans ce répertoire. 
+
+Dans la suite, nous avons créé 2 template pour pouvoir afficher des images se trouvant dans le répertoire d'un fichier .md. 
+
+### Template slider d'images
 
 On veut ajouter un template qui affiche un slider pour toutes les images contenu dans le répertoire courant. <br>
 cf. [http://learn.getgrav.org/cookbook/general-recipes#really-simple-css-image-slider](://learn.getgrav.org/cookbook/general-recipes#really-simple-css-image-slider)
@@ -120,7 +127,7 @@ title: slider d'image
 ---
 ```
 
-### Ajout d'une page de galerie
+### Template galerie d'images
 
 On ajoute un template pour afficher automatiquement toutes les images se trouvant dans le répertoire du fichier markdown.
 
@@ -180,7 +187,6 @@ title: Écrans application smartphone
 
 >Voici les 37 écrans jQuery mobile pour la version 2015
 ```
-
 
 Auparavant, les images ont été préfixées par un chiffre afin de fixer un certain ordre d'affichage.
 
