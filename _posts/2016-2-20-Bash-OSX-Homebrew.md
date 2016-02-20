@@ -3,7 +3,7 @@ layout: post
 title:  Mettre à jour son bash sous Mac OS X 10.10
 ---
 
-Cet article montre comment mettre à jour son shell bash sous Mac OS X 10.10.
+Cet article montre comment mettre à jour son shell bash sous OS X Yosemite.
 
 Le bash en version 4 est très utile. Par exemple avec l'expansion de paramètre qui permet ceci :
 
