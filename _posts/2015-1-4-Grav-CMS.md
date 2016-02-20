@@ -83,3 +83,25 @@ div#slider figure {
     animation: 30s slidy infinite;
 }
 ```
+
+themes/learn2/templates/gallery.html.twig
+
+{% raw %}
+```twig
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+
+    <div id="slider">
+        <figure>
+        {% for image in page.media.images %}
+            {{ image.html }}
+        {% endfor %}
+        </figure>
+    </div>
+
+    {{ page.content }}
+{% endblock %}
+```
+{% endraw %}
+
