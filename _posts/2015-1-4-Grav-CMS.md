@@ -136,3 +136,33 @@ figure.stacked figcaption{
 }
 ```
 
+- ajout d'un thème : themes/learn2/templates/gallery.html.twig
+
+{% raw %}
+```twig
+{% extends 'partials/base.html.twig' %}
+
+{#
+  ajout pom galerie de toutes les images
+#}
+
+{% block content %}
+  {{ page.content }}
+
+        {% for image in page.media.images %}
+          <figure class="stacked">
+            {{ image.html(image.url, image.url) }}
+            <figcaption>
+              {% set fileName = image.url | split('/') %}
+              {{ fileName[count(fileName) - 1] }}
+            </figcaption>
+          </figure>
+        {% endfor %}
+{% endblock %}
+```
+{% endraw %}
+
+
+
+
+
