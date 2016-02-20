@@ -87,7 +87,8 @@ div#slider figure {
 - ajout d'un template twig base.html.twig dans themes/learn2/templates
 
 ```
-{{ "{% extends 'partials/base.html.twig' %}" }}
+{{ 
+"{% extends 'partials/base.html.twig' %}
 
 {% block content %}
 
@@ -101,6 +102,7 @@ div#slider figure {
 
     {{ page.content }}
 {% endblock %}
+"}}
 ```
 
 Le fichier md doit s'appeler base.md et peut être vide ou avoir comme ici seulement un titre.
