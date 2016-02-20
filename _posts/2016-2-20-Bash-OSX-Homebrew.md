@@ -1,8 +1,10 @@
 ---
 layout: post
-title:  Mettre à jour son bash sous Mac OS X 10.10
-tags: osx, bash
+title: Mettre à jour son bash sous Mac OS X 10.10
+tags: "osx, bash"
+published: true
 ---
+
 
 Cet article montre comment mettre à jour son shell bash sous OS X Yosemite.
 
@@ -34,7 +36,7 @@ Qu'à cela ne tienne nous allons mettre à jour bash. On pourrait aller téléch
 
 Mais nous allons utiliser homebrew qui est un gestionnaire de paquets sous Mac et qui s'installe très facilement.
 
-Pour cela, on va sur http://brew.sh/
+Pour cela, on va sur [http://brew.sh/](http://brew.sh/)
 
 On copie dans un terminal la commande demandée :
 
@@ -62,5 +64,3 @@ sudo ln -s  /usr/local/Cellar/bash/4.3.42/bin/bash /bin/bash
 ```
 
 Et voila, notre script est maintenant fonctionnel!
-
-
