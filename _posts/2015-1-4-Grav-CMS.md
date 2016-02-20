@@ -86,7 +86,7 @@ div#slider figure {
 - ajout d'un template twig base.html.twig dans themes/learn2/templates
 
 ```html
-{% extends 'partials/base.html.twig' %}
+{% \extends 'partials/base.html.twig' %}
 
 {% block content %}
 
