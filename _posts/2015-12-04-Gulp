@@ -1,0 +1,153 @@
+---
+layout: post
+title: Gulp tuto
+published: true
+tags: gulp, js, browser-sync, sass, scss, css
+---
+
+### Objectif
+
+Le but du tutoriel est d'avoir un projet opérationnel pour faire du javascript et SPA.
+Pour cela, nous allons utiliser gulp, sass et browser-sync.
+
+- sass permet de compiler du scss en css
+- browser-sync permet de lancer un serveur et de synchroniser des navigateurs quand ils navigueront sur notre page
+- gulp nous permet de lancer des tâches (dont les 2 précédentes)
+
+### Prérequis
+
+- node doit être installé (et par conséquent de npm)
+
+```bash
+woody$ npm -version
+3.3.6
+```
+
+### Procédure
+
+```bash
+woody$ mkdir templateJS
+woody$ cd templateJS/
+woody$ npm init
+woody$ npm install gulp gulp-sass browser-sync --save-dev
+```
+
+### Création de la structure du projet
+
+Notre application aura la structure suivante :
+
+```
+public/
+  |  assets/
+  |  |  css/
+  |  |  |  app.css
+  |  |  js/
+  |  |  |  vendor/
+  |  |  |  |  jquery.min.js
+  |  |  |  app.js
+source/
+  |  js/
+  |  |  courage.js
+  |  |  wisdom.js
+  |  |  power.js
+  |  scss/
+  |  |  app.scss
+  |  |  grid.scss
+gulpfile.js
+packages.json
+```
+
+- création des répertoires du projet
+
+```bash
+woody$ mkdir public
+woody$ mkdir -p source/js
+woody$ mkdir -p source/scss
+```
+
+- création d'un gulpfile
+
+```bash
+woody$ cat > gulpfile.js << EOF
+var gulp        = require('gulp');
+var browserSync = require('browser-sync').create();
+var sass        = require('gulp-sass');
+
+// Static Server + watching scss/html files
+gulp.task('serve', ['sass'], function() {
+
+    browserSync.init({
+        server: "./app"
+    });
+
+    gulp.watch("app/scss/*.scss", ['sass']);
+    gulp.watch("app/*.html").on('change', browserSync.reload);
+});
+
+// Compile sass into CSS & auto-inject into browsers
+gulp.task('sass', function() {
+    return gulp.src("app/scss/*.scss")
+        .pipe(sass())
+        .pipe(gulp.dest("app/css"))
+        .pipe(browserSync.stream());
+});
+
+gulp.task('default', ['serve']);
+EOF
+```
+
+Le gulpfile à l'heure actuelle permet de :
+- compiler les fichiers scss en css avec la tâche sass
+- lancer un serveur web qui scrute les modifications scss et html avec la tâche serve
+- lancer la tâche serve quand on lance la commande "gulp" sans paramètre
+
+- création du fichier index.html
+
+```bash
+woody$ cat > index.html << EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Template webapp SPA</title>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+  <h1>Démo</h1>
+
+  <div class="content">
+    <div class="ligne1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa nobis porro nostrum, placeat deserunt maxime in, sequi illo aspernatur, vero omnis. Sit quia sunt atque dicta laudantium, minima voluptatibus labore.</div>
+    <div class="ligne2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum illum optio veniam deserunt, sunt quae blanditiis odio maxime quo incidunt, sed impedit tempore aut eligendi. Adipisci officia neque magni delectus.</div>
+  </div>
+</body>
+</html>
+EOF
+```
+
+- création du fichier source scss
+
+```bash
+woody$ cat > source/scss/app.scss << EOF
+$primaryFont: Helvetica, sans-serif;
+$primaryColor: rgb(48, 64, 159);
+$secondaryColor: rgb(236, 171, 171);
+$ternaryColor: rgb(79, 212, 104);
+$primaryColorText: orange;
+
+body{
+  font: 100% $primaryFont;
+  color: $primaryColorText;
+}
+
+.content{
+  width: 300px;
+  height: 200px;
+  .ligne1{
+    color: $secondaryColor;
+  }
+  .ligne2{
+    color: $ternaryColor;
+  }
+}
+EOF
+```
