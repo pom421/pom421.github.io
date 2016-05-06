@@ -4,12 +4,11 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Je m'appelle Po Mauguet, développeur sur Paris, pour vous (as)servir ;).
 
-### More Information
+Mes goûts se concentrent sur le frontend JS/SPA & les applis mobiles.
+Je vais ajouter ici des docs qualitatives sur ces sujets.
 
-A place to include any other types of information that you'd like to include about yourself.
+### Contact
 
-### Contact me
-
-[email@domain.com](mailto:email@domain.com)
+[mauguet.po at gmail.com](mailto:mauguet.po  at gmail.com)
