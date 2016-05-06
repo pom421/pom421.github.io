@@ -7,7 +7,7 @@ permalink: /about/
 Je m'appelle Po Mauguet, développeur sur Paris, pour vous (as)servir ;).
 
 Mes goûts se concentrent sur le frontend JS/SPA & les applis mobiles.
-Je vais ajouter ici des docs qualitatives sur ces sujets.
+Je vais ajouter ici des docs (on espère!) qualitatives sur ces sujets.
 
 ### Contact
 
