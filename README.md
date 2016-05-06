@@ -1,3 +1,10 @@
+# Démarrage rapide
+
+- dans le répertoire courant
+- jekyll serve
+- http://localhost:4000
+
+
 # Jekyll Now
 
 **Jekyll** is a static site generator that's perfect for GitHub hosted blogs ([Jekyll Repository](https://github.com/jekyll/jekyll))
