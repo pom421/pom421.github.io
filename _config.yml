@@ -76,3 +76,8 @@ exclude:
     - LICENSE
     - README.md
     - CNAME
+    
+collections:
+- coding-challenges
+
+
