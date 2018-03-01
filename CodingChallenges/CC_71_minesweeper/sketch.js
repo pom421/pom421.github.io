@@ -3,8 +3,19 @@ let manager
 function setup() {
   createCanvas(1500, 1000)
 
-  // lancement en mode test
-  if (typeof gridSample !== "undefined") {
+  var params = getURLParams()
+
+  if (typeof params.rows !== "undefined" && typeof params.cols !== "undefined") {
+    // partie normale
+    manager = new GridManager({
+      nb_tiles_h: params.cols,
+      nb_tiles_v: params.rows,
+      nb_mines: Math.round(params.cols * params.rows / 10)
+    })
+    manager.createGrid()
+    manager.addRandomMines()
+       
+  } else if (typeof gridSample !== "undefined") { // lancement en mode test
     manager = new GridManager({ mode: "test" })
     manager.createGridFromSample(gridSample)
   } else {
@@ -31,7 +42,7 @@ function draw() {
 }
 
 function mousePressed() {
-  if (!manager.isGameOver) {
+  if (!manager.isGameOver && !manager.isWon) {
     const x = Math.ceil(mouseX / SIZE_TILE) - 1
     const y = Math.ceil(mouseY / SIZE_TILE) - 1
 
