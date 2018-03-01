@@ -78,6 +78,6 @@ exclude:
     - CNAME
     
 collections:
-- coding-challenges
+- CC_71_minesweeper
 
 
