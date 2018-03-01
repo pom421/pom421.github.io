@@ -130,12 +130,13 @@ class GridManager {
         tile.emphasize()
       } else if (tile.state === "") {
         this.revealAdjacentTiles(x, y)
-
-        if (this.countRevealedTiles() + this.nb_mines === this.nb_tiles) {
-          this.isWon = true
-          this.revealGrid()
-        }
       }
+
+      if (this.countRevealedTiles() + this.nb_mines === this.nb_tiles) {
+        this.isWon = true
+        this.revealGrid()
+      }
+
     }
 
   }
@@ -146,7 +147,7 @@ class GridManager {
 
   revealAdjacentTiles(x, y) {
 
-    const neighbours = this.getCrossNeighbours(x, y)
+    const neighbours = this.getAllNeighbours(x, y)
 
     neighbours.forEach(
       elt => this.revealTileIfNoBomb(elt.x, elt.y)
@@ -167,26 +168,6 @@ class GridManager {
 
       }
     }
-  }
-
-  // just the neighbours but not in diagonal
-  getCrossNeighbours(tileX, tileY) {
-    let arr = []
-
-    if (tileX - 1 >= 0) {
-      arr.push(this.grid[tileY][tileX - 1])
-    }
-    if (tileY - 1 >= 0) {
-      arr.push(this.grid[tileY - 1][tileX])
-    }
-    if (tileX + 1 < this.nb_tiles_h) {
-      arr.push(this.grid[tileY][tileX + 1])
-    }
-    if (tileY + 1 < this.nb_tiles_v) {
-      arr.push(this.grid[tileY + 1][tileX])
-    }
-
-    return arr
   }
 
   toggleFlag(x, y) {

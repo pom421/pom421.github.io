@@ -45,7 +45,7 @@ function mousePressed() {
         document.getElementById("status").innerHTML = "Boum !"
         document.getElementById("status").style.color = "red"
       } else if (manager.isWon) {
-        document.getElementById("status").innerHTML = "Gagné !"
+        document.getElementById("status").innerHTML = "Gagn&eacute; !"
         document.getElementById("status").style.color = "green"
 
       }
