@@ -1,0 +1,1 @@
+Implémentation du [coding challenge #71](https://github.com/CodingTrain/website/tree/master/CodingChallenges/CC_71_minesweeper) de Coding Train
