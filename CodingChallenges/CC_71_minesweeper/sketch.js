@@ -42,7 +42,7 @@ function draw() {
 }
 
 function mousePressed() {
-  manager.runChrono()
+
   if (!manager.isGameOver && !manager.isWon) {
     const x = Math.ceil(mouseX / SIZE_TILE) - 1
     const y = Math.ceil(mouseY / SIZE_TILE) - 1

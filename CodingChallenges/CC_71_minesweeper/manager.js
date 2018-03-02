@@ -121,6 +121,7 @@ class GridManager {
   revealTile(x, y) {
     
     if (this.checkCoordinates(x, y)) {
+      this.runChrono()
       let tile = this.grid[y][x]
       tile.reveal()
 
@@ -172,6 +173,7 @@ class GridManager {
 
   toggleFlag(x, y) {
     if (this.checkCoordinates(x, y)) {
+      this.runChrono()
       this.nbFlags = this.nbFlags + this.grid[y][x].toggleFlag()
     }
   }
