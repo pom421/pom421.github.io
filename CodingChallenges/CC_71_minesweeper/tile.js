@@ -26,20 +26,24 @@ class Tile {
   }
 
   toggleFlag() {
-    this.flag = !this.flag
-
-    if (this.flag) {
-      textSize(12)
-      textAlign(CENTER, CENTER)
-      fill(color("blue"))
-
-      text("?", this.x * SIZE_TILE + SIZE_TILE / 2, this.y * SIZE_TILE + SIZE_TILE / 2)
-      return 1
+    if (this.revealed) {
+      return 0
     } else {
-      this.showNeutral()
-      return -1
-    }
+      this.flag = !this.flag
+  
+      if (this.flag) {
+        textSize(12)
+        textAlign(CENTER, CENTER)
+        fill(color("blue"))
+  
+        text("?", this.x * SIZE_TILE + SIZE_TILE / 2, this.y * SIZE_TILE + SIZE_TILE / 2)
+        return 1
+      } else {
+        this.showNeutral()
+        return -1
+      }
 
+    }
   }
 
   emphasize() {

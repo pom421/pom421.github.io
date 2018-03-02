@@ -119,9 +119,9 @@ class GridManager {
   }
 
   revealTile(x, y) {
-    let tile = this.grid[y][x]
-
+    
     if (this.checkCoordinates(x, y)) {
+      let tile = this.grid[y][x]
       tile.reveal()
 
       if (tile.state === "B") {
@@ -174,6 +174,24 @@ class GridManager {
     if (this.checkCoordinates(x, y)) {
       this.nbFlags = this.nbFlags + this.grid[y][x].toggleFlag()
     }
+  }
+
+  runChrono() {
+    const displayTime = () => {
+      let elapsed = Math.round((new Date() - this.startTime) / 1000)
+      document.getElementById("timer").innerHTML = elapsed + " seconds"
+    }
+
+    if (!this.startTime) {
+      this.startTime = new Date()
+      displayTime()
+    }
+    setInterval(() => {
+      if (!this.isGameOver && !this.isWon) {
+        displayTime()
+      }
+    }, 1000)
+
   }
 }
 
