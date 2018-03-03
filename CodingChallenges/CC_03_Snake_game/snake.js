@@ -1,39 +1,56 @@
 class Snake {
   constructor() {
-    this.headX = 0
-    this.headY = 0
-    this.points = []
-    this.size = 20
-    this.direction = null
-    this.idTimeout = null
+    this.tail = []
+    this.tail.push(createVector(0, 0))
+    this.speed = createVector(0, 0)
+  }
+
+  update() {
+    if (this.growing) {
+      debugger
+      this.tail.push("vector to add")
+      this.growing = false
+    }
+    
+    for (let i = this.tail.length - 1; i > 0; i--) {
+      this.tail[i] = this.tail[i - 1]
+    }
+    
+    this.tail[0] = this.tail[0].copy().add(this.speed)
+    this.tail[0].x = constrain(this.tail[0].x, 0, width - unit)
+    this.tail[0].y = constrain(this.tail[0].y, 0, height - unit)
+
+  }
+
+  dir(dirX, dirY) {
+    this.speed = createVector(dirX, dirY).mult(unit)
   }
 
   show() {
     fill(200)
-    rect(this.headX, this.headY, this.size, this.size)
+    this.tail.forEach(elt => {
+      rect(elt.x, elt.y, unit, unit)
+    })
+    
   }
 
-  go(direction) {
-    clearTimeout(this.idTimeout)
+  isEating(food) {
+    const distance = this.tail[0].dist(food.pos)
+    return this.growing = distance < 1
+  }
 
-    switch (direction) {
-      case "LEFT":
-        this.headX = this.headX - 10 >= 0 ? this.headX - 10 : this.headX
-        this.idTimeout = setTimeout(() => this.go("LEFT"), 100)
-        break
-      case "RIGHT":
-        this.headX = this.headX + this.size + 10 < width ? this.headX + 10 : this.headX
-        this.idTimeout = setTimeout(() => this.go("RIGHT"), 100)
-        break
-      case "UP":
-        this.headY = this.headY - 10 >= 0 ? this.headY - 10 : this.headY
-        this.idTimeout = setTimeout(() => this.go("UP"), 100)
-        break
-      case "DOWN":
-        this.headY = this.headY + this.size + 10 < height ? this.headY + 10 : this.headY
-        this.idTimeout = setTimeout(() => this.go("DOWN"), 100)
-        break
+  isColliding() {
+
+    if (this.tail[0].x >= width || this.tail[0].x < 0 || 
+      this.tail[0].y >= height || this.tail[0].y < 0) {
+        return true
+      }
+
+    for (var i = 1; i < this.tail.length; i++) {
+      if (this.tail[0].dist(this.tail[i]) === 0) {
+        return true
+      }
     }
+    return false
   }
-
 }
