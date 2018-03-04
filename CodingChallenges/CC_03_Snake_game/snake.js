@@ -16,7 +16,8 @@ class Snake {
       this.tail[i] = this.tail[i - 1]
     }
     
-    this.tail[0] = this.tail[0].copy().add(this.speed)
+    //this.tail[0] = this.tail[0].copy().add(this.speed)
+    this.tail[0] = p5.Vector.add(this.tail[0], this.speed)
     this.tail[0].x = constrain(this.tail[0].x, 0, width - unit)
     this.tail[0].y = constrain(this.tail[0].y, 0, height - unit)
 
