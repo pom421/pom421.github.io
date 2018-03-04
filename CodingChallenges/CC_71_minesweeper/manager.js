@@ -119,7 +119,7 @@ class GridManager {
   }
 
   revealTile(x, y) {
-    
+
     if (this.checkCoordinates(x, y)) {
       this.runChrono()
       let tile = this.grid[y][x]
@@ -187,13 +187,14 @@ class GridManager {
     if (!this.startTime) {
       this.startTime = new Date()
       displayTime()
-    }
-    setInterval(() => {
-      if (!this.isGameOver && !this.isWon) {
-        displayTime()
-      }
-    }, 1000)
 
+      setInterval(() => {
+        if (!this.isGameOver && !this.isWon) {
+          displayTime()
+        }
+      }, 1000)
+
+
+    }
   }
 }
-
