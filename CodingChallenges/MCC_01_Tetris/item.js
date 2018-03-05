@@ -4,7 +4,7 @@ const items = [
         scheme: [
             [0, 1, 0],
             [1, 1, 1]
-        ],        
+        ],
         scheme1: [
             [1, 0], [0, 1], [1, 1], [2, 1]
         ],
@@ -12,44 +12,22 @@ const items = [
             [0, 0], [0, 1], [1, 1], [2, 0]
         ],
         color: "black"
-    }
-
-]
-
-// renvoie les coordonnées des points à dessiner
-const getCoord = (item) => {
-    let arr = []
-    for (let row = 0; row < item.scheme.length; row++) {
-        for (let col = 0; col < item.scheme[row].length; col++) {
-            console.log("row col", row, col)
-            if (item.scheme[row][col]) {
-                arr.push({ col, row})
-
-            }
-        }
-    }
-    return arr
-}
-
-
-/*const items = [
+    },
     {
         name: "SQUARE",
         scheme: [
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 1, 1, 0],
-            [0, 1, 1, 0]
+            [1, 1],
+            [1, 1]
         ],
         color: "red"
     },
     {
         name: "LINE",
         scheme: [
-            [0, 1, 0, 0],
-            [0, 1, 0, 0],
-            [0, 1, 0, 0],
-            [0, 1, 0, 0]
+            [1],
+            [1],
+            [1],
+            [1]
         ],
         color: "blue"
     },
@@ -88,17 +66,20 @@ const getCoord = (item) => {
             [0, 1, 1]
         ],
         color: "green"
-    },
-    {
-        name: "THREE",
-        scheme: [
-            [0, 0, 0],
-            [0, 1, 0],
-            [1, 1, 1]
-        ],
-        color: "black"
     }
-
 ]
 
-*/
+// renvoie les coordonnées des points à dessiner
+const getCoord = (item) => {
+    let arr = []
+    for (let row = 0; row < item.scheme.length; row++) {
+        for (let col = 0; col < item.scheme[row].length; col++) {
+            console.log("row col", row, col)
+            if (item.scheme[row][col]) {
+                arr.push({ col, row })
+
+            }
+        }
+    }
+    return arr
+}

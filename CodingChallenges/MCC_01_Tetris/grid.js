@@ -30,7 +30,7 @@ class Grid {
         this.middle = floor(cols / 2) - 1
     }
 
-    show() {
+    debug() {
         for (let i = 0; i <= rows; i++) {
             stroke(126);
             fill(color("black"))
@@ -44,8 +44,8 @@ class Grid {
     }
 
     pickItem() {
-        // random(items)
-        this.currentItem = items.filter(item => item.name === "THREE")[0]
+        this.currentItem = random(items)
+        //this.currentItem = items.filter(item => item.name === "THREE")[0]
         this.rowOffset = 19
         this.colOffset = this.middle
 
@@ -112,6 +112,7 @@ class Grid {
     }
 
     showContent() {
+        this.debug()
         for (let row = 0; row < 20; row++) {
             for (let col = 0; col < 10; col++) {
                 if (this.workingLayer[row][col]) {

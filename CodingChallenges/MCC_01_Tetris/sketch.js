@@ -14,7 +14,7 @@ function setup() {
 
 function draw() {
 
-  grid.show()
+  //grid.debug()
 }
 
 function keyPressed() {
