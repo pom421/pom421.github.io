@@ -7,12 +7,12 @@ function setup() {
   createCanvas(201, 401)
   grid = new Grid()
   setInterval(() => {
+    background(250)
     grid.update()
   }, 1000)
 }
 
 function draw() {
-  background(250)
 
   grid.show()
 }

@@ -1,17 +1,33 @@
+const eraseLayer = layer => {
+    for (let i = 0; i < layer.length; i++) {
+        for (let j = 0; j < layer[i].length; j++) {
+            layer[i][j] = null
+        }
+    }
+}
+
 class Grid {
 
     constructor() {
-        this.content = Array(20)
-        
-        
+        // layer du passé
+        this.staticLayer = Array(20)
         for (var row = 0; row < 20; row++) {
-            this.content[row] = new Array(10).fill(null)
+            this.staticLayer[row] = new Array(10).fill(null)
+        }
+        // layer pour l'item en cours qui bouge
+        this.dynamicLayer = Array(20)
+        for (var row = 0; row < 20; row++) {
+            this.dynamicLayer[row] = new Array(10).fill(null)
+        }
+        // la fusion des 2 pour l'affichage
+        this.workingLayer = Array(20)
+        for (var row = 0; row < 20; row++) {
+            this.workingLayer[row] = new Array(10).fill(null)
         }
 
+        this.colOffset = null
+
         this.middle = floor(cols / 2) - 1
-        this.xoffset = null
-        this.yoffset = null
-        this.currentItem = this.pickItem()
     }
 
     show() {
@@ -30,48 +46,76 @@ class Grid {
     pickItem() {
         // random(items)
         this.currentItem = items.filter(item => item.name === "THREE")[0]
+        this.rowOffset = 19
+        this.colOffset = this.middle
 
-        this.xoffset = this.middle
-        this.yoffset = 0
-
-        this.posCurrentItem = this.currentItem.scheme1.map(coord => [ coord[0] + this.xoffset, coord[1 + this.yoffset]])
-
-        this.addItem()
-
-    }
-
-    addItem() {
-        this.posCurrentItem.forEach(coord => {
-            this.content[coord[1]][coord[0]] = this.currentItem.color
-            console.table(this.content)
+        getCoord(this.currentItem).forEach(coord => {
+            this.dynamicLayer[coord.row][coord.col + this.colOffset] = this.currentItem.color
         })
+
     }
 
     dir(x, y) {
-        this.pos.x = this.pos.x + x
-        this.pos.y = this.pos.y + y
+        if (x === 1) {
+            for (let row = 0; row < 20; row++) {
+                for (let col = 9; col >= 1; col--) {
+                    this.dynamicLayer[row][col] = this.dynamicLayer[row][col - 1]
+                }
+                this.dynamicLayer[row][0] = null
+            }
+        } else if (x === -1) {
+            for (let row = 0; row < 20; row++) {
+                for (let col = 0; col < 9; col++) {
+                    this.dynamicLayer[row][col] = this.dynamicLayer[row][col + 1]
+                }
+                this.dynamicLayer[row][9] = null
+            }
+        } else if (y === 1) {
+            this.dropItem()
+        }
+        console.log(this.dynamicLayer)
+    }
+
+    mergeLayers() {
+        for (let row = 0; row < 20; row++) {
+            for (let col = 0; col < 10; col++) {
+                this.workingLayer[row][col] = this.staticLayer[row][col] || this.dynamicLayer[row][col]
+            }
+        }
+        return this.workingLayer
     }
 
     // mise à jour de l'élément courant
     update() {
 
-        let size = this.currentItem.scheme.length
-        fill(color(this.currentItem.color))
-        // pos = floor(cols / 2), 0
-        for (var i = 0; i < this.currentItem.scheme.length; i++) {
-            for (var j = 0; j < this.currentItem.scheme[i].length; j++) {
-                if (this.currentItem.scheme[i][j] === 1) {
-                    this.content(this.pos.x + j, this.pos.y + i)
-                }
-            }
+        eraseLayer(this.workingLayer)
+        //eraseLayer(this.dynamicLayer)
+
+        if (!this.currentItem) {
+            this.pickItem()
         }
+
+        this.dropItem()
+
+        this.workingLayer = this.mergeLayers()
+        this.showContent()
+    }
+
+    dropItem() {
+        if (this.rowOffset > 0) {
+            this.dynamicLayer.unshift([null, null, null, null, null, null, null, null, null, null])
+            this.dynamicLayer.pop()
+        }
+
+        this.rowOffset--
+
     }
 
     showContent() {
-        for (let row = 0; row < this.content.length; row++) {
-            for (let col = 0; col < this.content[row]; col++) {
-                if (this.content[row][col]) {
-                    fill(color(this.content[row][col]))
+        for (let row = 0; row < 20; row++) {
+            for (let col = 0; col < 10; col++) {
+                if (this.workingLayer[row][col]) {
+                    fill(color(this.workingLayer[row][col]))
                     rect(col * unit, row * unit, unit, unit)
                 }
             }
