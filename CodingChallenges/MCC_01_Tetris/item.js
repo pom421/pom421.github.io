@@ -1,85 +1,62 @@
+const colors = {
+    0: "250",
+    1: "black",
+    2: "red",
+    3: "blue",
+    4: "orange",
+    5: "purple",
+    6: "magenta",
+    7: "green"
+}
+
 const items = [
     {
-        name: "THREE",
-        scheme: [
+        matrix: [
             [0, 1, 0],
             [1, 1, 1]
-        ],
-        scheme1: [
-            [1, 0], [0, 1], [1, 1], [2, 1]
-        ],
-        scheme2: [
-            [0, 0], [0, 1], [1, 1], [2, 0]
-        ],
-        color: "black"
+            [0, 0, 0],
+        ]
     },
     {
-        name: "SQUARE",
-        scheme: [
-            [1, 1],
-            [1, 1]
-        ],
-        color: "red"
+        matrix: [
+            [2, 2],
+            [2, 2]
+        ]
     },
     {
-        name: "LINE",
-        scheme: [
-            [1],
-            [1],
-            [1],
-            [1]
-        ],
-        color: "blue"
+        matrix: [
+            [0, 3, 0, 0],
+            [0, 3, 0, 0],
+            [0, 3, 0, 0],
+            [0, 3, 0, 0]
+        ]
     },
     {
-        name: "S1",
-        scheme: [
-            [0, 1, 0],
-            [1, 1, 0],
-            [1, 0, 0]
-        ],
-        color: "orange"
+        matrix: [
+            [0, 4, 0],
+            [4, 4, 0],
+            [4, 0, 0]
+        ]        
     },
     {
-        name: "S2",
-        scheme: [
-            [1, 0, 0],
-            [1, 1, 0],
-            [0, 1, 0]
-        ],
-        color: "purple"
+        matrix: [
+            [5, 0, 0],
+            [5, 5, 0],
+            [0, 5, 0]
+        ]
     },
     {
-        name: "L1",
-        scheme: [
-            [0, 1, 0],
-            [0, 1, 0],
-            [0, 1, 1]
-        ],
-        color: "magenta"
+        matrix: [
+            [6, 0, 0],
+            [6, 0, 0],
+            [6, 6, 0]
+        ]
     },
     {
-        name: "L2",
-        scheme: [
-            [0, 0, 1],
-            [0, 0, 1],
-            [0, 1, 1]
-        ],
-        color: "green"
+        matrix: [
+            [0, 7, 0],
+            [0, 7, 0],
+            [7, 7, 0]
+        ]
     }
 ]
-
-// renvoie les coordonnées des points à dessiner
-const getCoord = (item) => {
-    let arr = []
-    for (let row = 0; row < item.scheme.length; row++) {
-        for (let col = 0; col < item.scheme[row].length; col++) {
-            console.log("row col", row, col)
-            if (item.scheme[row][col]) {
-                arr.push({ col, row })
-
-            }
-        }
-    }
-    return arr
-}

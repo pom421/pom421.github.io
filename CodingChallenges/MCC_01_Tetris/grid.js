@@ -6,7 +6,7 @@ const eraseLayer = layer => {
     }
 }
 
-class Grid {
+class Arena {
 
     constructor() {
         // layer du passé

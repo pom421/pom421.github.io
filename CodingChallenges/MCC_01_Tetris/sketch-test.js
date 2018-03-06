@@ -10,29 +10,16 @@ function setup() {
   
   player.pickItem()
   player.begin()
+  
 }
 
 function draw() {
-
+  
   //arena.debug()
 }
 
 function keyPressed() {
-  switch (keyCode) {
-    case UP_ARROW:
-      player.rotateItem()
-      break
-    case LEFT_ARROW: 
-      player.offset(0, -1)
-      break
-    case RIGHT_ARROW: 
-      player.offset(0, 1)
-      break
-    case DOWN_ARROW: 
-      player.offset(1, 0)
-      break
-
-  }
+  player.rotateItem()
   
   console.table(player.item)
 }
