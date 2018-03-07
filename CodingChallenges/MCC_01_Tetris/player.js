@@ -1,16 +1,23 @@
 class Player {
     constructor() {
-        this.xoffset = 4
-        this.yoffset = 0
-        this.item
-        this.arena = Array(20).fill(null)
 
-        for (let row = 0; row < 20; row++) {
-            this.arena[row] = Array(10).fill(0)
+        this.arena = Array(NB_ROWS).fill(null)
+        for (let row = 0; row < NB_ROWS; row++) {
+            this.arena[row] = Array(NB_COLS).fill(0)
         }
+        this.reset()
+
+        this.beginAnimation()
     }
 
-    begin() {
+    reset() {
+        console.log("Nouvel item")
+        this.pickItem()
+        this.yoffset = 0
+        this.xoffset = 4
+    }
+
+    beginAnimation() {
         if (!this.item) {
             this.pickItem()
         }
@@ -18,50 +25,95 @@ class Player {
     }
 
     pickItem() {
-        this.item = random(items).matrix
-    }
-
-    drawItem() {
-        background(250)
-
-        noStroke()
-        for (let row = 0; row < this.item.length; row++) {
-            for (let col = 0; col < this.item[row].length; col++) {
-                fill(color(colors[this.item[row][col]]))
-                rect((col + this.xoffset) * unit, (row + this.yoffset) * unit, unit, unit)
-
-            }
-        }
+        this.item = random(items)
     }
 
     offset(row, col) {
 
-        const freeSpace = this.isFreeSpace({ arena: this.arena, item: this.item, xoffset: this.xoffset, yoffset: this.yoffset })
+        console.log("yoffset/xoffset", this.yoffset, this.xoffset)
 
-        if (freeSpace === "OK") {
+        const WORKING_ON_ROW = row ? true : false
+
+        let xoffset, yoffset
+        if (WORKING_ON_ROW) {
+            xoffset = this.xoffset
+            yoffset = this.yoffset + row
+        } else {
+            yoffset = this.yoffset
+            xoffset = this.xoffset + col
+        }
+
+        const freeSpace = this.isFreeSpace({ arena: this.arena, item: this.item, xoffset, yoffset })
+
+        if (freeSpace) {
             this.xoffset += col
             this.yoffset += row
-        } else if (freeSpace === "Y") {
+        } else if (WORKING_ON_ROW) {
             // problème sur l'axe des Y
+            this.destroyLines()
             this.mergeArena()
-            this.pickItem()
-            this.yoffset = 0
-        } else if (freeSpace === "X") {
+            this.drawArena()
+            this.reset()
+
+        } else {
             console.log("Problème sur l'axe des X")
         }
+
+        this.drawArena()
         this.drawItem()
     }
 
     mergeArena() {
-        for (let row = 0; row < item.length; row++) {
-            for (let col = 0; col < item[row].length; col++) {
-                if (item[row][col]) {
+        for (let row = 0; row < this.item.length; row++) {
+            for (let col = 0; col < this.item[row].length; col++) {
+                if (this.item[row][col]) {
                     // ajout de la couleur dans l'arene
-                    arena[row + this.yoffset][col + this.xoffset] = this.item[row][col]
+                    this.arena[row + this.yoffset][col + this.xoffset] = this.item[row][col]
                 }
             }
         }
     }
+    
+
+    drawArena() {
+        background(250)
+
+        stroke(color("lightgray"))
+        for (let row = 0; row < this.arena.length; row++) {
+            for (let col = 0; col < this.arena[row].length; col++) {
+                fill(color(colors[this.arena[row][col]]))
+                rect(col * unit, row * unit, unit, unit)
+            }
+        }
+    }
+
+    destroyLines() {
+        for (let row = 0; row < this.arena.length; row++) {
+            let isComplete = true
+            for (let col = 0; col < this.arena[row].length; col++) {
+                if (!this.arena[row][col]) {
+                    isComplete = false
+                    break
+                }
+            }
+            if (isComplete) {
+                this.arena.splice(row, 1)
+                this.arena.unshift(Array(NB_COLS).fill(0))
+            }
+        }
+    }
+
+    drawItem() {
+        for (let row = 0; row < this.item.length; row++) {
+            for (let col = 0; col < this.item[row].length; col++) {
+                if (this.item[row][col]) {
+                    fill(color(colors[this.item[row][col]]))
+                    rect((col + this.xoffset) * unit, (row + this.yoffset) * unit, unit, unit)
+                }
+            }
+        }
+    }
+
 
     isFreeSpace({ arena, item, xoffset, yoffset }) {
         for (let row = 0; row < item.length; row++) {
@@ -69,38 +121,40 @@ class Player {
                 // on ne prend que les éléments de l'item non vide (!= 0)
                 if (item[row][col]) {
                     // si on dépasse les limtites normales
-                    if (row + yoffset < 0 ) {
-                        return "Y"
-                    } else if (col + xoffset > 9 ||  col.xoffset < 0) {
-                        return "X"
+                    if (row + yoffset > NB_ROWS - 1) {
+                        return false
+                    } else if ((col + xoffset > NB_COLS - 1) || (col + xoffset < 0)) {
+                        return false
                     }
                     // s'il y a déjà un bloc qui est présent là où veut se placer un bout de pièce
-                    if (arena[row + yoffset][col + xoffset] !== 0) {
-                        return "Y" // TODO??
+                    if (arena[row + yoffset][col + xoffset]) {
+                        return false
                     }
 
                 }
             }
         }
 
-        return "OK"
+        return true
     }
 
     rotateItem() {
-        let matrix = this.item
-        let res = Array(matrix.length).fill(null)
-        for (let row = 0; row < matrix.length; row++) {
-            res[row] = Array(matrix.length).fill(null)
+
+        let res = Array(this.item.length).fill(null)
+        for (let row = 0; row < this.item.length; row++) {
+            res[row] = Array(this.item.length).fill(null)
         }
 
-        for (let row = 0; row < matrix.length; row++) {
-            //matrix[row]
-            for (let col = 0; col < matrix[row].length; col++) {
-                res[col][matrix.length - 1 - row] = matrix[row][col]
+        for (let row = 0; row < this.item.length; row++) {
+            //this.item[row]
+            for (let col = 0; col < this.item[row].length; col++) {
+                res[col][this.item.length - 1 - row] = this.item[row][col]
             }
         }
 
         this.item = res
+        this.drawArena()
         this.drawItem()
     }
+
 }
