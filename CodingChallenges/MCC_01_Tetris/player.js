@@ -1,4 +1,5 @@
 class Player {
+
     constructor() {
 
         this.arena = Array(NB_ROWS).fill(null)
@@ -6,8 +7,11 @@ class Player {
             this.arena[row] = Array(NB_COLS).fill(0)
         }
         this.reset()
+        if (!this.item) {
+            this.pickItem()
+        }
 
-        this.beginAnimation()
+        this.togglePause()
     }
 
     reset() {
@@ -16,12 +20,14 @@ class Player {
         this.yoffset = 0
         this.xoffset = 4
     }
-
-    beginAnimation() {
-        if (!this.item) {
-            this.pickItem()
+    
+    togglePause() {
+        if (!this.intervalID) {
+            this.intervalID = setInterval(() => this.offset(1, 0), 1000)
+        } else {
+            clearInterval(this.intervalID)
+            this.intervalID = null
         }
-        setInterval(() => this.offset(1, 0), 1000)
     }
 
     pickItem() {
@@ -50,10 +56,13 @@ class Player {
             this.yoffset += row
         } else if (WORKING_ON_ROW) {
             // problème sur l'axe des Y
-            this.destroyLines()
             this.mergeArena()
-            this.drawArena()
-            this.reset()
+            this.destroyLines()
+            if (!this.yoffset) {
+                this.gameOver()
+            } else {
+                this.reset()
+            }
 
         } else {
             console.log("Problème sur l'axe des X")
@@ -61,6 +70,12 @@ class Player {
 
         this.drawArena()
         this.drawItem()
+    }
+
+    gameOver() {
+        document.getElementById("status").innerHTML = "Game Over"
+        document.getElementById("status").style.visibility = "visible"
+        clearInterval(this.intervalID)
     }
 
     mergeArena() {
@@ -114,7 +129,6 @@ class Player {
         }
     }
 
-
     isFreeSpace({ arena, item, xoffset, yoffset }) {
         for (let row = 0; row < item.length; row++) {
             for (let col = 0; col < item[row].length; col++) {
@@ -130,7 +144,6 @@ class Player {
                     if (arena[row + yoffset][col + xoffset]) {
                         return false
                     }
-
                 }
             }
         }
@@ -152,9 +165,13 @@ class Player {
             }
         }
 
-        this.item = res
-        this.drawArena()
-        this.drawItem()
+        if (this.isFreeSpace({ arena: this.arena, item: res, xoffset: this.xoffset, yoffset: this.yoffset })) {
+            this.item = res
+            this.drawArena()
+            this.drawItem()
+
+        }
+
     }
 
 }

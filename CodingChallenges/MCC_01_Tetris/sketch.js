@@ -14,12 +14,10 @@ function setup() {
 }
 
 function draw() {
-
-  //arena.debug()
 }
 
 function keyPressed() {
-  console.log("keypressed")
+  console.log("keypressed", keyCode)
   switch (keyCode) {
     case UP_ARROW:
       player.rotateItem()
@@ -35,6 +33,9 @@ function keyPressed() {
       break
     case TAB:
       console.table(player.arena)
+      break
+    case 80:
+      player.togglePause()
 
   }
 
