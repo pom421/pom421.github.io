@@ -1,13 +1,14 @@
+const DURATION = 4000
 const colors = ["red", "orange", "green", "violet", "magenta", "marroon", "blue", "yellow"]
 
-const getPersonnages = data => {
+const getCharacters = data => {
     let res = {}
     let color = 0
 
-    data.map(replique => replique.personnage)
-        .forEach(personnage => {
-            if (!res[personnage]) {
-                res[personnage] = colors[color++]
+    data.map(elt => elt.character)
+        .forEach(character => {
+            if (!res[character]) {
+                res[character] = colors[color++]
             }
         })
 
@@ -37,37 +38,40 @@ class Sheet {
     speechEnded() {
         console.log("Fin")
 
-        if (this.idReplique >= this.repliques.length) {
+        if (this.id >= this.data.length) {
             console.log("Fin des répliques")
         } else if (this.pause) {
             console.log("En pause")
         } else {
-            this.speakNextReplique()
+            this.speakNext()
         }
     }
 
     init(data, tabletop) {
-        this.repliques = data
+        this.data = data
         this.tabletop = tabletop
-        this.idReplique = 0
-        this.personnages = getPersonnages(this.repliques)
+        this.id = 0
+        this.characters = getCharacters(this.data)
 
-        for (let personnage in this.personnages) {
-            this.select.option(personnage)
+        for (let character in this.characters) {
+            this.select.option(character)
         }
 
-        this.select.changed(this.choixPersonnage.bind(this))
+        this.select.changed(this.characterChoice.bind(this))
     }
 
-    choixPersonnage() {
+    characterChoice() {
 
-        this.personnage = this.select.value()
+        this.character = this.select.value()
     }
 
     toggleRun() {
         if (this.pause) {
             this.pause = false
-            this.speakNextReplique()
+            if (this.id < this.data.length) {
+                this.speakNext()
+
+            }
         } else {
             this.pause = true
 
@@ -78,30 +82,40 @@ class Sheet {
         this.speech.cancel()
     }
 
-    speakNextReplique() {
-        console.log("idReplique", this.idReplique, "(" + this.repliques.length + ")")
-        const personnage = this.repliques[this.idReplique].personnage
+    speakNext() {
 
-        if (personnage === this.personnage) {
-            let p = createP(`<span style="padding: 0 10px; color:${this.personnages[personnage]}">${personnage}</span> : ------------------------------------------`).show()
+        console.log("id", this.id, "(" + this.data.length + ")")
+        const character = this.data[this.id].character
+
+        if (character === this.character) {
+            let starter = `<span style="padding: 0 10px; color:${this.characters[character]}">${character}</span> :`
+            let p = createP(starter + "  ").show()
             this.toggleRun()
-            const phrase = `<span style="padding: 0 10px; color:${this.personnages[personnage]}">${personnage}</span> : ${this.repliques[this.idReplique].phrase}`
-            setTimeout(this.reveal.bind(this, p, 
-                (function(phrase) {
-                    return phrase
-                })(phrase)), 4000)
-            
+
+            const idInterval = setInterval(() => p.html("--", true), 500)
+            let html = `${starter} ${this.data[this.id].sentence}`
+            const duration = this.data[this.id].duration ? this.data[this.id].duration * 1000 : DURATION
+            console.log("Durée : " + duration)
+            setTimeout(this.reveal.bind(this, p, html, idInterval), duration)
         } else {
-            createP(`<span style="padding: 0 10px; color:${this.personnages[personnage]}">${personnage}</span> : ${this.repliques[this.idReplique].phrase}`)
-            this.speech.speak(this.repliques[this.idReplique].phrase)
-            
+            createP(`<span style="padding: 0 10px; color:${this.characters[character]}">${character}</span> : ${this.data[this.id].sentence}`)
+            this.speech.speak(this.data[this.id].sentence)
+            this.id++
+
         }
-        this.idReplique++
-        
+
     }
-    
-    reveal(paragraph, replique) {
-        paragraph.html(replique)
+
+    /**
+     * Révèle la phrase cachée
+     * 
+     * @param {*} paragraph 
+     * @param {*} html 
+     */
+    reveal(paragraph, html, idInterval) {
+        clearInterval(idInterval)
+        this.id++
+        paragraph.html(html)
         this.toggleRun()
     }
 
