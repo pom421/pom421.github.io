@@ -92,18 +92,33 @@ class Sheet {
             let p = createP(starter + "  ").show()
             this.toggleRun()
 
-            const idInterval = setInterval(() => p.html("--", true), 500)
-            let html = `${starter} ${this.data[this.id].sentence}`
+            let progress = (percentage) => `<div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%"></div>
+                </div>`
+                
+            const animationPace = 16
             const duration = this.data[this.id].duration ? this.data[this.id].duration * 1000 : DURATION
-            console.log("Durée : " + duration)
-            setTimeout(this.reveal.bind(this, p, html, idInterval), duration)
+            let percentage = 0
+            let lap = 0
+            const nbLaps = (duration / animationPace) * lap
+            let html = `${starter} ${this.data[this.id].sentence}`
+            
+            const idInterval = setInterval(() => {
+                lap++
+                percentage = animationPace * lap / duration * 100
+                console.log("lap/percentage", lap, percentage)
+                p.html(progress(percentage))
+                if (percentage >= 100) {
+                    this.reveal.bind(this, p, html, idInterval)()
+                }
+            }, animationPace)
+
         } else {
             createP(`<span style="padding: 0 10px; color:${this.characters[character]}">${character}</span> : ${this.data[this.id].sentence}`)
             this.speech.speak(this.data[this.id].sentence)
             this.id++
 
         }
-
     }
 
     /**
