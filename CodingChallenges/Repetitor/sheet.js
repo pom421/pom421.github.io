@@ -1,5 +1,6 @@
 const DURATION = 4000
 const colors = ["red", "orange", "green", "violet", "magenta", "marroon", "blue", "yellow"]
+const ANIMATION_PACE = 16
 
 const getCharacters = data => {
     let res = {}
@@ -95,24 +96,23 @@ class Sheet {
             let progress = (percentage, nbSec) => `${starter} <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%">${nbSec}</div>
                 </div>`
-                
-            const animationPace = 16
+
             const duration = this.data[this.id].duration ? this.data[this.id].duration * 1000 : DURATION
             let percentage = 0
             let lap = 0
-            const nbLaps = (duration / animationPace) * lap
+            const nbLaps = (duration / ANIMATION_PACE) * lap
             let html = `${starter} ${this.data[this.id].sentence}`
-            
+
             const idInterval = setInterval(() => {
                 lap++
-                let timeLeft = Math.ceil((duration - (animationPace * lap)) / 1000)
-                percentage = animationPace * lap / duration * 100
+                let timeLeft = Math.ceil((duration - (ANIMATION_PACE * lap)) / 1000)
+                percentage = ANIMATION_PACE * lap / duration * 100
                 console.log("lap/percentage", lap, percentage)
                 p.html(progress(percentage, timeLeft))
                 if (percentage >= 100) {
                     this.reveal.bind(this, p, html, idInterval)()
                 }
-            }, animationPace)
+            }, ANIMATION_PACE)
 
         } else {
             createP(`<span style="padding: 0 10px; color:${this.characters[character]}">${character}</span> : ${this.data[this.id].sentence}`)
