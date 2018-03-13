@@ -92,8 +92,8 @@ class Sheet {
             let p = createP(starter + "  ").show()
             this.toggleRun()
 
-            let progress = (percentage) => `<div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%"></div>
+            let progress = (percentage, nbSec) => `${starter} <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100" style="width: ${percentage}%">${nbSec}</div>
                 </div>`
                 
             const animationPace = 16
@@ -105,9 +105,10 @@ class Sheet {
             
             const idInterval = setInterval(() => {
                 lap++
+                let timeLeft = Math.ceil((duration - (animationPace * lap)) / 1000)
                 percentage = animationPace * lap / duration * 100
                 console.log("lap/percentage", lap, percentage)
-                p.html(progress(percentage))
+                p.html(progress(percentage, timeLeft))
                 if (percentage >= 100) {
                     this.reveal.bind(this, p, html, idInterval)()
                 }
