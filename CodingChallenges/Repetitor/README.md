@@ -7,11 +7,4 @@ La pièce de théâtre se trouve sur Google Drive sous forme d'un tableur.
 
 ### Todo
 
-- ajouter un curseur en fonction du temps à attendre
-Faire un truc du genre 
-
-            -X-----------
-            --X----------
-            ---X---------
-
-en fonction de la duration
+- permettre d'aller à la première réplique du personnage (exemple: pour Gwendoline qui parle au bout de plusieurs pages)
