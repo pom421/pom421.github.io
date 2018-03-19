@@ -16,6 +16,13 @@
 	<script src="sketch.js"></script>
 	<script src="sheet.js"></script>
 
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	 crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	 crossorigin="anonymous"></script>
+
 	<style>
 		body {
 			margin: 0;
@@ -31,24 +38,73 @@
 
 <body style="padding-left: 20px">
 	<h1>Repetitor</h1>
-	
-	<p>See <a href="https://github.com/pom421/pom421.github.io/tree/master/CodingChallenges/Repetitor">code on GitHub</a></p>
 
-	<p>With Repetitor, you can repeat a whole theater scene with nobody but a computer (and a good old browser like Chrome or Firefox!)</p>
+	<p>See
+		<a href="https://github.com/pom421/pom421.github.io/tree/master/CodingChallenges/Repetitor">code on GitHub</a>
+	</p>
 
-	<p><i>Instructions : choose a character to repeat. Clic Run. Press right arrow to skip the current sentence. Press space to pause</i></p>
+	<p>
+		<b>With Repetitor, you can repeat a whole theater scene with nobody but a computer</b> (and a good old browser like Chrome
+		or Firefox!). Go practice your memory!</p>
+
+	<p>
+		<i>Instructions : choose a character to repeat. Clic Run. Press right arrow to skip the current sentence. Press space to pause
+			<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+				How to change sheet
+			</button>
+		</i>
+	</p>
 
 	<p id="urlSheet"></p>
 
 	<p>
 		<select id="characterSelect"></select>
-	
+
 		<button id="toggleRunButton"></button>
-		
+
 		<button id="nextButton">Next</button>
 	</p>
 
 	<div id='myContainer' style='padding: 10px; height: 600px; width: 100%; overflow-y:scroll; overflow-x:scroll; border: 1px solid #d3d3d3'></div>
+
+	<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Add another sheet</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>
+						You can use any Google sheet with the following format : 
+					</p>
+
+					<ul>
+						<li>
+							first colon named character and referencing the character who speaks
+						</li>
+						<li>
+							second colon named sentence, which carries the sentence to be spoken
+						</li>
+						<li>
+								third colon named duration is optionnal. The value in second represents the time given to this sentence when it is hidden
+						</li>
+					</ul>
+
+					<p>
+						The Google sheet must be shared and published on the web. Then, get the URL to that file.
+
+						Run the program with this URL and use the urlSeet parameter (index.html?urlSheet=URL-to-sheet)</a>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
