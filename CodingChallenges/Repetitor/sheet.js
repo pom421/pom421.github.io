@@ -1,4 +1,4 @@
-const DURATION = 4000
+const DURATION = 2000
 const COLORS = ["primary", "success", "danger", "warning", "info", "secondary","light", "dark"]
 const ANIMATION_PACE = 16
 
@@ -68,6 +68,7 @@ class Sheet {
     init(data, tabletop) {
         this.data = data
         this.tabletop = tabletop
+        // id of the next sentence to run
         this.id = 0
         this.characters = getCharacters(this.data)
 
@@ -81,6 +82,18 @@ class Sheet {
     characterChoice() {
 
         this.character = this.select.value()
+
+        this.id = this.searchFirstSentence(this.character)
+    }
+
+    searchFirstSentence(character) {
+        for (let i = 0; i < this.data.length; i++) {
+            if (this.data[i].character === character) {
+                return Math.max(i - 1, 0)
+            }
+        }
+        // cas impossible
+        return 0
     }
 
     toggleRun() {
