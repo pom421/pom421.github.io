@@ -1,5 +1,5 @@
 const DURATION = 4000
-const colors = ["red", "orange", "green", "violet", "magenta", "marroon", "blue", "yellow"]
+const COLORS = ["primary", "success", "danger", "warning", "info", "secondary","light", "dark"]
 const ANIMATION_PACE = 16
 
 const getCharacters = data => {
@@ -9,7 +9,7 @@ const getCharacters = data => {
     data.map(elt => elt.character)
         .forEach(character => {
             if (!res[character]) {
-                res[character] = colors[color++]
+                res[character] = COLORS[color++]
             }
         })
 
@@ -19,16 +19,33 @@ const getCharacters = data => {
 
 class Sheet {
 
-    constructor(speech, select) {
-        this.speech = speech
-        this.select = select
+    constructor(idGoogleSheet) {
+
+        this.speech = new p5.Speech()
+
+        this.urlSheet = select("#urlSheet")
+        this.select = select("#characterSelect")
+        this.toggleRunButton = select("#toggleRunButton")
+        this.nextButton = select("#nextButton")
+
+        this.urlSheet.html(`URL Google sheet : <a target="_blank" href=${idGoogleSheet}>${idGoogleSheet}</a>`)
 
         this.pause = true
 
-        speech.onStart = this.speechStarted.bind(this)
-        speech.onEnd = this.speechEnded.bind(this)
+        this.speech.onStart = this.speechStarted.bind(this)
+        this.speech.onEnd = this.speechEnded.bind(this)
 
-        speech.setRate(1.2)
+        this.speech.setRate(1.2)
+
+        this.toggleRunButton.html("Run")
+        this.toggleRunButton.mousePressed((e) => {
+            this.toggleRun()
+        })
+
+        this.nextButton.mousePressed(() => {
+            this.next()
+        })
+
 
     }
 
@@ -67,13 +84,16 @@ class Sheet {
     }
 
     toggleRun() {
+
         if (this.pause) {
+            this.toggleRunButton.html("Pause")
             this.pause = false
             if (this.id < this.data.length) {
                 this.speakNext()
-
+                
             }
         } else {
+            this.toggleRunButton.html("Re-run")
             this.pause = true
 
         }
@@ -84,13 +104,14 @@ class Sheet {
     }
 
     speakNext() {
-
         console.log("id", this.id, "(" + this.data.length + ")")
         const character = this.data[this.id].character
+        
+        let starter = `<span style="margin-right:10px" class="badge badge-${this.characters[character]}">${character}</span> `
 
         if (character === this.character) {
-            let starter = `<span style="padding: 0 10px; color:${this.characters[character]}">${character}</span> :`
-            let p = createP(starter + "  ").show()
+            let p = createP(starter + "  ")
+            p.parent("myContainer")
             this.toggleRun()
 
             let progress = (percentage, nbSec) => `${starter} <div class="progress">
@@ -115,11 +136,15 @@ class Sheet {
             }, ANIMATION_PACE)
 
         } else {
-            createP(`<span style="padding: 0 10px; color:${this.characters[character]}">${character}</span> : ${this.data[this.id].sentence}`)
+            let p = createP(`${starter} ${this.data[this.id].sentence}`)
+            p.parent("myContainer")
             this.speech.speak(this.data[this.id].sentence)
             this.id++
 
         }
+
+        let myContainerHTML = document.querySelector("#myContainer")
+        myContainerHTML.scrollTop = myContainerHTML.scrollHeight
     }
 
     /**
@@ -133,6 +158,15 @@ class Sheet {
         this.id++
         paragraph.html(html)
         this.toggleRun()
+    }
+
+    keyPressed() {
+        switch (keyCode) {
+            case RIGHT_ARROW:
+                this.skipToNext()
+            case 32:
+                this.toggleRun()
+        }
     }
 
 }

@@ -1,17 +1,18 @@
-const idGoogleSheet = "https://docs.google.com/spreadsheets/d/1c5QlP0q_mPQ-s2AVxa0KJFgONELIBrNNzBSHDU8woBI/"
-const voices = ["Thomas", "Amelie", "Google français"]
+//const idGoogleSheet = "https://docs.google.com/spreadsheets/d/1c5QlP0q_mPQ-s2AVxa0KJFgONELIBrNNzBSHDU8woBI/"
+const idGoogleSheet = "https://docs.google.com/spreadsheets/d/1tPQ8qQX_6Xc6SvR_xMBZ6W_vG5m-NmHLMbwEVm7lbJI/"
 
 let sheet
-let select
-let run
 
 function setup() {
 	noCanvas()
-	
-	const speech = new p5.Speech()
-	select = createSelect()
 
-	sheet = new Sheet(speech, select)
+	var params = getURLParams();
+
+	if (params.urlSheet) {
+		idGoogleSheet = params.urlSheet
+	}
+	
+	sheet = new Sheet(idGoogleSheet)
 
 	Tabletop.init({
 		key: idGoogleSheet,
@@ -19,23 +20,10 @@ function setup() {
 		simpleSheet: true
 	})
 
-	run = createButton("Lancer")
-	run.mousePressed((e) => {
-		sheet.toggleRun()
-		run.html(run.html() === "Lancer" ? "Pause" : "Lancer")
-	})
-
-	let next = createButton("Suivant")
-	next.mousePressed(() => {
-		sheet.next()
-	})
 }
 
 function keyPressed() {
-	switch (keyCode) {
-		case RIGHT_ARROW:
-			sheet.skipToNext()
-	}
+	sheet.keyPressed()
 }
 
 

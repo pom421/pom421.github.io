@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,15 +18,35 @@
 
 	<style>
 		body {
-			margin:0;
-			padding:0;
+			margin: 0;
+			padding: 0;
 			overflow: hidden;
 		}
+
 		canvas {
-			margin:auto;
+			margin: auto;
 		}
 	</style>
 </head>
-<body>
+
+<body style="padding-left: 20px">
+	<h1>Repetitor</h1>
+	
+	<p>With Repetitor, you can repeat a whole theater scene with nobody but a computer (and a good old browser like Chrome or Firefox!)</p>
+
+	<p><i>Instructions : choose a character to repeat. Clic Run. Press right arrow to skip the current sentence. Press space to pause</i></p>
+
+	<p id="urlSheet"></p>
+
+	<p>
+		<select id="characterSelect"></select>
+	
+		<button id="toggleRunButton"></button>
+		
+		<button id="nextButton">Next</button>
+	</p>
+
+	<div id='myContainer' style='padding: 10px; height: 600px; width: 100%; overflow-y:scroll; overflow-x:scroll; border: 1px solid #d3d3d3'></div>
 </body>
+
 </html>
