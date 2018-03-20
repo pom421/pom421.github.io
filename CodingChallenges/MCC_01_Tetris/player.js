@@ -1,7 +1,7 @@
 class Player {
 
-    constructor(p) {
-        this.p = p
+    constructor() {
+
         this.arena = Array(NB_ROWS).fill(null)
         for (let row = 0; row < NB_ROWS; row++) {
             this.arena[row] = Array(NB_COLS).fill(0)
@@ -31,7 +31,7 @@ class Player {
     }
 
     pickItem() {
-        this.item = this.p.random(items)
+        this.item = random(items)
     }
 
     offset(row, col) {
@@ -91,13 +91,13 @@ class Player {
     
 
     drawArena() {
-        this.p.background(250)
+        background(250)
 
-        this.p.stroke(this.p.color("lightgray"))
+        stroke(color("lightgray"))
         for (let row = 0; row < this.arena.length; row++) {
             for (let col = 0; col < this.arena[row].length; col++) {
-                this.p.fill(this.p.color(colors[this.arena[row][col]]))
-                this.p.rect(col * unit, row * unit, unit, unit)
+                fill(color(colors[this.arena[row][col]]))
+                rect(col * unit, row * unit, unit, unit)
             }
         }
     }
@@ -122,8 +122,8 @@ class Player {
         for (let row = 0; row < this.item.length; row++) {
             for (let col = 0; col < this.item[row].length; col++) {
                 if (this.item[row][col]) {
-                    this.p.fill(this.p.color(colors[this.item[row][col]]))
-                    this.p.rect((col + this.xoffset) * unit, (row + this.yoffset) * unit, unit, unit)
+                    fill(color(colors[this.item[row][col]]))
+                    rect((col + this.xoffset) * unit, (row + this.yoffset) * unit, unit, unit)
                 }
             }
         }
