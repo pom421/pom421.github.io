@@ -4,16 +4,35 @@ let unit
 let score = 0
 let arena
 let player
+let myThrottle
+
+
+function throttle(fn, period) {
+  let lastRun = + new Date()
+
+  return function () {
+    let now = +new Date()
+
+    if (now - lastRun > period) {
+      fn.apply(player)
+      lastRun = now
+    }
+  }
+}
 
 function setup() {
-  createCanvas(301, 601)
+  createCanvas(601, 601)
 
-  unit = Math.floor(width / NB_COLS)
+  unit = Math.floor(301 / NB_COLS)
 
   player = new Player()
+  myThrottle = throttle(player.checkDownKeys, 60)
+
 }
 
 function draw() {
+  console.log("draw")
+  myThrottle()
 }
 
 function keyPressed() {
@@ -21,15 +40,7 @@ function keyPressed() {
   switch (keyCode) {
     case UP_ARROW:
       player.rotateItem()
-      break
-    case LEFT_ARROW:
-      player.offset(0, -1)
-      break
-    case RIGHT_ARROW:
-      player.offset(0, 1)
-      break
-    case DOWN_ARROW:
-      player.offset(1, 0)
+      console.log("UP")
       break
     case TAB:
       console.table(player.arena)
@@ -39,5 +50,5 @@ function keyPressed() {
 
   }
 
-  console.table(player.item)
+  //console.table(player.item)
 }

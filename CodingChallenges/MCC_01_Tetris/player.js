@@ -12,6 +12,11 @@ class Player {
         }
 
         this.togglePause()
+
+        // if the precedent piece was drop with down arrow
+        this.fastDownMovingPossible = true
+        this.fastHorizontalMovingPossible = true
+
     }
 
     reset() {
@@ -34,9 +39,35 @@ class Player {
         this.item = random(items)
     }
 
+    checkDownKeys() {
+        console.log("checkDownKeys")
+
+        if (keyIsDown(DOWN_ARROW) && this.fastDownMovingPossible) {
+            this.offset(1, 0)
+        }
+
+        if (!keyIsDown(DOWN_ARROW)) {
+            this.fastDownMovingPossible = true
+        }
+
+        if (keyIsDown(LEFT_ARROW) && this.fastHorizontalMovingPossible) {
+            this.offset(0, -1)
+        }
+
+        if (keyIsDown(RIGHT_ARROW) && this.fastHorizontalMovingPossible) {
+            this.offset(0, 1)
+        }
+
+        if (!keyIsDown(LEFT_ARROW) && !keyIsDown(RIGHT_ARROW)) {
+            this.fastHorizontalMovingPossible = true
+        }
+
+
+    }
+
     offset(row, col) {
 
-        console.log("yoffset/xoffset", this.yoffset, this.xoffset)
+        //console.log("yoffset/xoffset", this.yoffset, this.xoffset)
 
         const WORKING_ON_ROW = row ? true : false
 
@@ -64,7 +95,10 @@ class Player {
                 this.reset()
             }
 
+            this.fastDownMovingPossible = false
+            
         } else {
+            this.fastHorizontalMovingPossible = false
             console.log("Problème sur l'axe des X")
         }
 
