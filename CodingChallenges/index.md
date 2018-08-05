@@ -17,4 +17,5 @@ __Miscellaneous__
 
 __React__
 
-- [To do](http://pom421.github.io/CodingChallenges/React/todo/build/)
+- [Todo list](http://pom421.github.io/CodingChallenges/React/todo/build/)
+- [Calc](http://pom421.github.io/CodingChallenges/React/calc/build/)
