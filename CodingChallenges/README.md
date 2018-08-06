@@ -20,3 +20,4 @@ __React__
 - [Todo list](http://pom421.github.io/CodingChallenges/React/todo/build/)
 - [Calc](http://pom421.github.io/CodingChallenges/React/calc/build/)
 - [Weather](http://pom421.github.io/CodingChallenges/React/weather/build/)
+- [Thinking in React](http://pom421.github.io/CodingChallenges/React/product-table/build/)
