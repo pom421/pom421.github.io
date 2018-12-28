@@ -2,6 +2,7 @@
   "name": "carrousel",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://pom421.github.io/CodingChallenges/React/carrousel/build/",
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
