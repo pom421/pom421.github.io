@@ -1,0 +1,18 @@
+.buttons {
+  margin-top: 10px;
+}
+
+.button {
+  color: #aab8c2;
+  display: inline-block;
+  font-size: 1em;
+  width: 80px;
+}
+
+.button .nb {
+  margin-left: 10px;
+}
+
+.button.clicked {
+  color: Tomato;
+}

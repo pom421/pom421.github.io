@@ -1,0 +1,38 @@
+[
+  {
+    "idTweet": 1,
+    "isRt": true,
+    "isReplied": true,
+    "isLiked": false
+  },
+  {
+    "idTweet": 2,
+    "isRt": true,
+    "isReplied": false,
+    "isLiked": false
+  },
+  {
+    "idTweet": 3,
+    "isRt": false,
+    "isReplied": false,
+    "isLiked": true
+  },
+  {
+    "idTweet": 4,
+    "isRt": false,
+    "isReplied": true,
+    "isLiked": false
+  },
+  {
+    "idTweet": 5,
+    "isRt": true,
+    "isReplied": true,
+    "isLiked": true
+  },
+  {
+    "idTweet": 6,
+    "isRt": false,
+    "isReplied": false,
+    "isLiked": true
+  }
+]

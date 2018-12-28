@@ -1,0 +1,94 @@
+[
+  {
+    "id": 1,
+    "user": {
+      "name": "pom",
+      "handle": "@pom421",
+      "avatar": "./images/man-1.png"
+    },
+    "message": {
+      "time": "2018-02-08 09:30:26",
+      "text":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "nbReplies": 3,
+      "nbRt": 45,
+      "nbLikes": 87,
+      "isRt": false,
+      "isReplied": false,
+      "isLiked": true
+    }
+  },
+  {
+    "id": 2,
+    "user": {
+      "name": "gabitbol",
+      "handle": "@hlpcdm",
+      "avatar": "./images/man-2.png"
+    },
+    "message": {
+      "time": "2018-07-11 07:02:09",
+      "text": "Je ne suis pas mort. Mais je ne suis pas frais.",
+      "nbRt": 100,
+      "nbReplies": 100,
+      "nbLikes": 100,
+      "isRt": false,
+      "isReplied": true,
+      "isLiked": false
+    }
+  },
+  {
+    "id": 3,
+    "user": {
+      "name": "yakuza",
+      "handle": "@yakuzaDreams",
+      "avatar": "./images/man-6.png"
+    },
+    "message": {
+      "time": "2015-01-07 19:30:26",
+      "text":
+        "Je tiens à dire que je n'ai rien à dire. Et puis pourquoi on va sa gêner? Même que pas vrai d'abord.",
+      "nbRt": 3,
+      "nbReplies": 0,
+      "nbLikes": 10,
+      "isRt": false,
+      "isReplied": false,
+      "isLiked": true
+    }
+  },
+  {
+    "id": 4,
+    "user": {
+      "name": "punky",
+      "handle": "@punkyBrewster",
+      "avatar": "./images/girl-3.png"
+    },
+    "message": {
+      "time": "2016-01-07 19:30:26",
+      "text": "L'important c'est d'écouter son coeur",
+      "nbRt": 10,
+      "nbReplies": 2,
+      "nbLikes": 23,
+      "isRt": false,
+      "isReplied": false,
+      "isLiked": true
+    }
+  },
+  {
+    "id": 5,
+    "user": {
+      "name": "Buffy",
+      "handle": "@buffy",
+      "avatar": "./images/girl-2.png"
+    },
+    "message": {
+      "time": "2010-01-07 19:30:26",
+      "text": "J'aime bien les cimetières...",
+      "nbRt": 0,
+      "nbReplies": 3,
+      "nbLikes": 10,
+      "isRt": false,
+      "isReplied": false,
+      "isLiked": true
+    }
+  }
+]
