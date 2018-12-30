@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.6e74767d.chunk.css",
-  "main.js": "/static/js/main.17a7c9d0.chunk.js",
-  "main.js.map": "/static/js/main.17a7c9d0.chunk.js.map",
-  "static/js/1.f739feb7.chunk.js": "/static/js/1.f739feb7.chunk.js",
-  "static/js/1.f739feb7.chunk.js.map": "/static/js/1.f739feb7.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.6e74767d.chunk.css.map": "/static/css/main.6e74767d.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.eeb6316184bd5e5e931bea14d7752661.js": "/precache-manifest.eeb6316184bd5e5e931bea14d7752661.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/CodingChallenges/React/carrousel/build/static/css/main.6e74767d.chunk.css",
+  "main.js": "/CodingChallenges/React/carrousel/build/static/js/main.42bf1095.chunk.js",
+  "main.js.map": "/CodingChallenges/React/carrousel/build/static/js/main.42bf1095.chunk.js.map",
+  "static/js/1.f739feb7.chunk.js": "/CodingChallenges/React/carrousel/build/static/js/1.f739feb7.chunk.js",
+  "static/js/1.f739feb7.chunk.js.map": "/CodingChallenges/React/carrousel/build/static/js/1.f739feb7.chunk.js.map",
+  "runtime~main.js": "/CodingChallenges/React/carrousel/build/static/js/runtime~main.bfcc080a.js",
+  "runtime~main.js.map": "/CodingChallenges/React/carrousel/build/static/js/runtime~main.bfcc080a.js.map",
+  "static/css/main.6e74767d.chunk.css.map": "/CodingChallenges/React/carrousel/build/static/css/main.6e74767d.chunk.css.map",
+  "index.html": "/CodingChallenges/React/carrousel/build/index.html",
+  "precache-manifest.27091ae2dfdf81d3386cf67f7afcaee0.js": "/CodingChallenges/React/carrousel/build/precache-manifest.27091ae2dfdf81d3386cf67f7afcaee0.js",
+  "service-worker.js": "/CodingChallenges/React/carrousel/build/service-worker.js"
 }
