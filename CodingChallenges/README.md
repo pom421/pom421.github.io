@@ -23,3 +23,4 @@ __React__
 - [Product table](http://pom421.github.io/CodingChallenges/React/product-table/build/)
     - this one is the implementation of the [Thinking in React](https://reactjs.org/docs/thinking-in-react.html) page.
 - [Twiiiter](http://pom421.github.io/CodingChallenges/React/twitter/build/)
+- [Carrousel](http://pom421.github.io/CodingChallenges/React/carrousel/build/)
