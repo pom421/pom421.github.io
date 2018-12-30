@@ -1,17 +1,15 @@
 import React from 'react';
 
+// utility to join class name with an object as parameter
 const classNames = (obj) => {
   const res = Object.keys(obj)
     .filter(k => !!obj[k])
     .join(" ")
 
-  console.log("res", res);
   return res
 }
 
 function Bullet(props) {
-
-  console.log("render bullet")
 
   const classes = classNames({
     dot: true,

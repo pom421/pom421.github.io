@@ -1,37 +1,7 @@
 import React, { Component } from 'react';
 import "./Carrousel.css"
 import Bullet from "./Bullet"
-
-class Timer {
-  constructor({ duration, callback }) {
-    this.duration = duration
-    this.callback = callback
-  }
-
-  start = () => {
-    if (!this.id) {
-      this.id = setInterval(this.callback, this.duration)
-    }
-  }
-
-  isRunning = () => !!this.id
-
-  stop = () => {
-    if (this.id) {
-      clearInterval(this.id)
-      this.id = null
-    }
-  }
-
-  reset = () => {
-    this.stop()
-    this.start()
-  }
-
-  pause = () => {
-    this.stop()
-  }
-}
+import Timer from "./Timer"
 
 class Carrousel extends Component {
 
@@ -48,32 +18,33 @@ class Carrousel extends Component {
     this.timer = new Timer({
       duration: 2000,
       callback: () => {
-        this.setState(prevState => {
-
-          return {
-            id: this.nextId(prevState)
-          }
-        })
+        this.setState(prevState => ({
+          id: this.nextId(prevState)
+        }))
       }
     })
 
     this.runToggleCarrousel(this.timer)
 
-    document.addEventListener("keypress", this.handleKey)
-    document.addEventListener("keydown", this.handleKeyDown)
+    // BE CAREFUL : keypress is obsolete and may lead to some strange behaviour on browser
+    //document.addEventListener("keypress", this.handleKey, false)
+    document.addEventListener("keydown", this.handleKey, false)
+  }
+
+  componentWillUnmount() {
+    console.log("Suppression du setInterval");
+
+    this.timer.stop()
+
+    document.removeEventListener("keydown", this.handleKey)
   }
 
   handleKey = (event) => {
     console.log("key", event.key)
 
-    if (event.key === " " || "Spacebar") {
+    if (event.key === " " || event.key === "Spacebar") {
       this.runToggleCarrousel()
-    }
-  }
-
-  handleKeyDown = (event) => {
-
-    if (event.key === "ArrowRight") {
+    } else if (event.key === "ArrowRight") {
       this.nextPhoto()
     } else if (event.key === "ArrowLeft") {
       this.prevPhoto()
@@ -93,23 +64,22 @@ class Carrousel extends Component {
   }
 
   idPhoto = (id) => {
-    this.setState(prevState => ({
+    this.setState(_ => ({
       id
     }), () => !this.state.pause && this.timer.reset())
   }
 
   nextId = (prevState) => {
-    const quotient = Math.floor((prevState.id + 1) / this.photosSize)
-    const nextId = quotient ? 0 : prevState.id + 1
-    return nextId
+    const nextId = prevState.id + 1
+    return nextId === this.photosSize ? 0 : nextId
   }
 
   prevId = (prevState) => {
-    const prevId = prevState.id ? prevState.id - 1 : this.photosSize - 1
-    return prevId
+    const prevId = prevState.id - 1
+    return prevId < 0 ? this.photosSize - 1 : prevId
   }
 
-  runToggleCarrousel = (timer) => {
+  runToggleCarrousel = () => {
 
     if (this.timer.isRunning()) {
       this.timer.pause()
@@ -126,15 +96,6 @@ class Carrousel extends Component {
       this.timer.start()
     }
 
-  }
-
-  componentWillUnmount() {
-    console.log("Suppression du setInterval");
-
-    this.timer.stop()
-
-    document.removeEventListener("keypress", this.handleKey)
-    document.removeEventListener("keydown", this.handleKeyDown)
   }
 
   render() {
@@ -157,12 +118,7 @@ class Carrousel extends Component {
           <span className="arrow-right" onClick={this.nextPhoto} />
         </div>
         <div>
-          {/*photos.map((p, i) => i === this.state.id
-            ? <span key={i} className="dot selected" onClick={() => this.idPhoto(i)} />
-            : <span key={i} className="dot" onClick={() => this.idPhoto(i)} />
-
-          )*/}
-          {photos.map((p, i) =>
+          {photos.map((_, i) =>
 
             <Bullet key={i} id={i} selected={this.state.id} pause={this.state.pause} onClick={() => this.idPhoto(i)} />
 
